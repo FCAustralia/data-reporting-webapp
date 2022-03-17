@@ -1,0 +1,142 @@
+﻿@model App.Form.ViewModels.FormInput;
+
+@{
+    ViewData["Title"] = "Case Study Submission";
+}
+
+@section Scripts {
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery-validation-unobtrusive.js"></script>
+} 
+<div class="container">
+    <h1>@ViewData["Title"]</h1>
+
+    <p>Please submit your case studies here.</p>
+</div>
+<div class="container">
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        {
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <div class="my-2">
+                    @Html.LabelFor(model => model.SelectedOrganisation, htmlAttributes: new { @class = "control-label my-2" })
+                    @Html.DropDownListFor(model => model.SelectedOrganisation, new SelectList(Model.Organisations, "Value", "Text"), htmlAttributes: new { @class = "inline-form-control  my-2" })
+                    @Html.ValidationMessageFor(model => model.SelectedOrganisation, "", new { @class = "text-danger  my-2" })
+                </div>
+                <div class="my-2">
+                    @Html.DisplayNameFor(model => model.Reporter)
+                    @Html.ValidationMessageFor(model => model.Reporter, "", new { @class = "text-danger my-2" })
+                    @Html.EditorFor(model => model.Reporter, new { htmlAttributes = new { @class = "form-control  my-2" } })
+                </div>
+
+                <div class="my-2">
+                    @Html.DisplayNameFor(model => model.Email)
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger my-2" })
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control  my-2" } })
+                </div>
+            </div>
+            <div class="form-group">
+                <h1>Case Study One</h1>
+
+                <div class="form-check my-2">
+
+                    @Html.EditorFor(model => model.ConsentOne, new { htmlAttributes = new { @class = "form-check-input", @type = "checkbox" } })
+                    @Html.DisplayNameFor(model => model.ConsentOne)<br />
+                    @Html.ValidationMessageFor(model => model.ConsentOne, "", new { @class = "text-danger  my-2" })
+                </div>
+
+                <div class="my-2">
+                    @Html.DisplayNameFor(model => model.CsOneQuestionOne)
+                    @Html.ValidationMessageFor(model => model.CsOneQuestionOne, "", new { @class = "text-danger my-2" })
+                    @Html.EditorFor(model => model.CsOneQuestionOne, new { htmlAttributes = new { @class = "form-control  my-2", rows = "20" } })
+                </div>
+
+                <div class="my-2">
+                    @Html.DisplayNameFor(model => model.CsOneQuestionTwo)
+                    @Html.ValidationMessageFor(model => model.CsOneQuestionTwo, "", new { @class = "text-danger my-2" })
+                    @Html.EditorFor(model => model.CsOneQuestionTwo, new { htmlAttributes = new { @class = "form-control my-2", rows = "20" } })
+
+                </div>
+                <div class="my-2">
+                    @Html.DisplayNameFor(model => model.CsOneQuestionThree)
+                    @Html.ValidationMessageFor(model => model.CsOneQuestionThree, "", new { @class = "text-danger my-2" })
+                    @Html.EditorFor(model => model.CsOneQuestionThree, new { htmlAttributes = new { @class = "form-control my-2", rows = "20" } })
+
+                </div>
+                <div class="my-2">
+                    @Html.DisplayNameFor(model => model.CsOneQuestionFour)
+                    @Html.ValidationMessageFor(model => model.CsOneQuestionFour, "", new { @class = "text-danger my-2" })
+                    @Html.EditorFor(model => model.CsOneQuestionFour, new { htmlAttributes = new { @class = "form-control my-2", rows = "20" } })
+                </div>
+                    
+                <div class="my-2">
+                    @Html.DisplayNameFor(model => model.CsOneQuestionFive)
+                    @Html.ValidationMessageFor(model => model.CsOneQuestionFive, "", new { @class = "text-danger my-2" })
+                    @Html.EditorFor(model => model.CsOneQuestionFive, new { htmlAttributes = new { @class = "form-control my-2", rows = "20" } })
+
+                </div>
+                <div class="my-2">
+                    @Html.DisplayNameFor(model => model.CsOneQuestionSix)
+                    @Html.ValidationMessageFor(model => model.CsOneQuestionSix, "", new { @class = "text-danger my-2" })
+                    @Html.EditorFor(model => model.CsOneQuestionSix, new { htmlAttributes = new { @class = "form-control my-2", rows = "20" } })
+
+                </div>
+            </div>
+            <div class="form-group">
+                <h1>Case Study Two</h1>
+
+                <div class="form-check my-2">
+
+                    @Html.EditorFor(model => model.ConsentTwo, new { htmlAttributes = new { @class = "form-check-input", @type = "checkbox" } })
+                    @Html.DisplayNameFor(model => model.ConsentTwo)<br />
+                    @Html.ValidationMessageFor(model => model.ConsentTwo, "", new { @class = "text-danger clear  my-2" })
+
+                </div>
+
+                <div class="my-2">
+                    @Html.DisplayNameFor(model => model.CsTwoQuestionOne)
+                    @Html.ValidationMessageFor(model => model.CsTwoQuestionOne, "", new { @class = "text-danger my-2" })
+                    @Html.EditorFor(model => model.CsTwoQuestionOne, new { htmlAttributes = new { @class = "form-control my-2", rows = "20" } })
+
+                </div>
+
+                <div class="my-2">
+                    @Html.DisplayNameFor(model => model.CsTwoQuestionTwo)
+                    @Html.ValidationMessageFor(model => model.CsTwoQuestionTwo, "", new { @class = "text-danger my-2" })
+                    @Html.EditorFor(model => model.CsTwoQuestionTwo, new { htmlAttributes = new { @class = "form-control my-2", rows = "20" } })
+
+                </div>
+                <div class="my-2">
+                    @Html.DisplayNameFor(model => model.CsTwoQuestionThree)
+                    @Html.ValidationMessageFor(model => model.CsTwoQuestionThree, "", new { @class = "text-danger my-2" })
+                    @Html.EditorFor(model => model.CsTwoQuestionThree, new { htmlAttributes = new { @class = "form-control my-2", rows = "20" } })
+
+                </div>
+                <div class="my-2">
+                    @Html.DisplayNameFor(model => model.CsTwoQuestionFour)
+                    @Html.ValidationMessageFor(model => model.CsTwoQuestionFour, "", new { @class = "text-danger my-2" })
+                    @Html.EditorFor(model => model.CsTwoQuestionFour, new { htmlAttributes = new { @class = "form-control my-2", rows = "20" } })
+
+                </div>
+                <div class="my-2">
+                    @Html.DisplayNameFor(model => model.CsTwoQuestionFive)
+                    @Html.ValidationMessageFor(model => model.CsTwoQuestionFive, "", new { @class = "text-danger my-2" })
+                    @Html.EditorFor(model => model.CsTwoQuestionFive, new { htmlAttributes = new { @class = "form-control my-2", rows = "20" } })
+
+                </div>
+                <div class="my-2">
+                    @Html.DisplayNameFor(model => model.CsTwoQuestionSix)
+                    @Html.ValidationMessageFor(model => model.CsTwoQuestionSix, "", new { @class = "text-danger my-2" })
+                    @Html.EditorFor(model => model.CsTwoQuestionSix, new { htmlAttributes = new { @class = "form-control my-2", rows = "20" } })
+
+                </div>
+            </div>
+            <div class="form-group">
+                <input class="form-group" type="submit" />
+            </div>
+        }
+    }
+</div>

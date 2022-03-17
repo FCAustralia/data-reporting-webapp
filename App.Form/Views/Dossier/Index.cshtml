@@ -1,0 +1,222 @@
+﻿@model App.Form.ViewModels.FormInput;
+
+@{
+    ViewData["Title"] = "Case Study Submission";
+}
+<div class="container">
+    <h1>@ViewData["Title"]</h1>
+
+    <p>INSTRUCTIONS: Select your organisation to see submitted Case Studies or create a submission.</p>
+    @if (TempData.ContainsKey("EmailLinkSent"))
+    {
+        <p class="p-3 mb-2 bg-success text-white">@TempData["EmailLinkSent"]</p>
+    }
+
+</div>
+<div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+        <a class="navbar-brand" href="#">OPTIONS</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                
+                @if (Model != null)
+                {
+                    <li class="nav-item active">
+                        <a class="btn btn-outline-primary my-2 my-sm-0" asp-area="" asp-controller="Dossier" asp-action="EditableLink" asp-route-id="@Model.Id">Edit</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="nav-item disabled">
+                        <a class="btn btn-outline-secondary my-2 my-sm-0 disabled" href="#">Edit</a>
+                    </li> 
+                }
+
+            </ul>
+            @if (Model == null)
+            {
+                @using (Html.BeginForm(FormMethod.Post, new { @class = "form-inline my-2 my-lg-0" }))
+                {
+                    @Html.AntiForgeryToken()
+                    {
+                        @Html.DropDownList("Organisation",
+                           new SelectList(ViewBag.Organisations, "Value", "Text"),
+                           htmlAttributes: new { @class = "form-control mr-sm-2" })
+
+                        <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+                    }
+                }
+            }
+            @if (Model != null)
+            {
+                <span class="navbar-text">
+                    @Model.SelectedOrganisation
+                </span>
+            }
+
+        </div>
+    </nav>
+</div>
+
+@if (Model != null)
+{
+    
+    <div class="container">
+        <div id="accordion">
+            <div class="card">
+                <div class="card-header" id="headingContact">
+                    <b>
+                        Reporters details:  @Model.Reporter,  @Model.Email
+                    </b>
+                </div>
+                <div class="card-header" id="headingOne">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                            Case Study One
+                        </button>
+                    </h5>
+                </div>
+
+                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                    <div class="card-body">
+                        <ul class="nav nav-tabs">
+                            <!-- add data-toggle attribute to the anchors -->
+                            <li class="active p-3"><a data-toggle="tab" href="#cs-one-q1">Question 1</a></li>
+                            <li class="p-3"><a data-toggle="tab" href="#cs-one-q2">Question 2</a></li>
+                            <li class="p-3"><a data-toggle="tab" href="#cs-one-q3">Question 3</a></li>
+                            <li class="p-3"><a data-toggle="tab" href="#cs-one-q4">Question 4</a></li>
+                            <li class="p-3"><a data-toggle="tab" href="#cs-one-q5">Question 5</a></li>
+                            <li class="p-3"><a data-toggle="tab" href="#cs-one-q6">Question 6</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div id="cs-one-q1" class="tab-pane fade in active">
+                                <div class="mt-2 mb-2">
+                                    @Html.DisplayNameFor(model => model.CsOneQuestionOne)
+                                </div>
+                                <div>
+                                    @Html.Raw(Model.CsOneQuestionOne.Replace(Environment.NewLine, "<br/>"))
+                                </div>
+                            </div>
+                            <div id="cs-one-q2" class="tab-pane fade">
+                                <div class="mt-2 mb-2">
+                                    @Html.DisplayNameFor(model => model.CsOneQuestionTwo)
+                                </div>
+                                <div>
+                                    @Html.Raw(Model.CsOneQuestionTwo.Replace(Environment.NewLine, "<br/>"))
+                                </div>
+                            </div>
+                            <div id="cs-one-q3" class="tab-pane fade">
+                                <div class="mt-2 mb-2">
+                                    @Html.DisplayNameFor(model => model.CsOneQuestionThree)
+                                </div>
+                                <div>
+                                    @Html.Raw(Model.CsOneQuestionThree.Replace(Environment.NewLine, "<br/>"))
+                                </div>
+                            </div>
+                            <div id="cs-one-q4" class="tab-pane fade in active">
+                                <div class="mt-2 mb-2">
+                                    @Html.DisplayNameFor(model => model.CsOneQuestionFour)
+                                </div>
+                                <div>
+                                    @Html.Raw(Model.CsOneQuestionFour.Replace(Environment.NewLine, "<br/>"))
+                                </div>
+                            </div>
+                            <div id="cs-one-q5" class="tab-pane fade">
+                                <div class="mt-2 mb-2">
+                                    @Html.DisplayNameFor(model => model.CsOneQuestionFive)
+                                </div>
+                                <div>
+                                    @Html.Raw(Model.CsOneQuestionFive.Replace(Environment.NewLine, "<br/>"))
+                                </div>
+                            </div>
+                            <div id="cs-one-q6" class="tab-pane fade">
+                                <div class="mt-2 mb-2">
+                                    @Html.DisplayNameFor(model => model.CsOneQuestionSix)
+                                </div>
+                                <div>
+                                    @Html.Raw(Model.CsOneQuestionSix.Replace(Environment.NewLine, "<br/>"))
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" id="headingTwo">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            Case Study Two
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                    <div class="card-body">
+                        <ul class="nav nav-tabs">
+                            <!-- add data-toggle attribute to the anchors -->
+                            <li class="active p-3"><a data-toggle="tab" href="#cs-two-q1">Question 1</a></li>
+                            <li class="p-3"><a data-toggle="tab" href="#cs-two-q2">Question 2</a></li>
+                            <li class="p-3"><a data-toggle="tab" href="#cs-two-q3">Question 3</a></li>
+                            <li class="p-3"><a data-toggle="tab" href="#cs-two-q4">Question 4</a></li>
+                            <li class="p-3"><a data-toggle="tab" href="#cs-two-q5">Question 5</a></li>
+                            <li class="p-3"><a data-toggle="tab" href="#cs-two-q6">Question 6</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div id="cs-two-q1" class="tab-pane fade in active">
+                                <div class="mt-2 mb-2">
+                                    @Html.DisplayNameFor(model => model.CsTwoQuestionOne)
+                                </div>
+                                <div>
+                                    @Html.Raw(Model.CsTwoQuestionOne.Replace(Environment.NewLine, "<br/>"))
+                                </div>
+                            </div>
+                            <div id="cs-two-q2" class="tab-pane fade">
+                                <div class="mt-2 mb-2">
+                                    @Html.DisplayNameFor(model => model.CsTwoQuestionTwo)
+                                </div>
+                                <div>
+                                    @Html.Raw(Model.CsTwoQuestionTwo.Replace(Environment.NewLine, "<br/>"))
+                                </div>
+                            </div>
+                            <div id="cs-two-q3" class="tab-pane fade">
+                                <div class="mt-2 mb-2">
+                                    @Html.DisplayNameFor(model => model.CsTwoQuestionThree)
+                                </div>
+                                <div>
+                                    @Html.Raw(Model.CsTwoQuestionThree.Replace(Environment.NewLine, "<br/>"))
+                                </div>
+                            </div>
+                            <div id="cs-two-q4" class="tab-pane fade in active">
+                                <div class="mt-2 mb-2">
+                                    @Html.DisplayNameFor(model => model.CsTwoQuestionFour)
+                                </div>
+                                <div>
+                                    @Html.Raw(Model.CsTwoQuestionFour.Replace(Environment.NewLine, "<br/>"))
+                                </div>
+                            </div>
+                            <div id="cs-two-q5" class="tab-pane fade">
+                                <div class="mt-2 mb-2">
+                                    @Html.DisplayNameFor(model => model.CsTwoQuestionFive)
+                                </div>
+                                <div>
+                                    @Html.Raw(Model.CsTwoQuestionFive.Replace(Environment.NewLine, "<br/>"))
+                                </div>
+                            </div>
+                            <div id="cs-two-q6" class="tab-pane fade">
+                                <div class="mt-2 mb-2">
+                                    @Html.DisplayNameFor(model => model.CsTwoQuestionSix)
+                                </div>
+                                <div>
+                                    @Html.Raw(Model.CsTwoQuestionSix.Replace(Environment.NewLine, "<br/>"))
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
